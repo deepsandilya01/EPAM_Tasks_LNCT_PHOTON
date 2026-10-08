@@ -1,0 +1,46 @@
+CAS vs Lock Experiment
+
+I made a small program to compare a synchronized counter with a
+CAS based counter.
+
+I used 10 threads and each thread performed 100000 increments.
+Both approaches were given the same amount of work.
+
+For the first approach, I used synchronized to protect the counter.
+
+For the second approach, I used AtomicInteger and compareAndSet()
+to update the counter.
+
+Run:
+
+javac CasVsLockBenchmark.java
+java CasVsLockBenchmark
+
+Output:
+
+CAS vs Lock
+
+Lock:
+Expected = 1000000
+Actual   = 1000000
+Time     = 42.539319 ms
+
+CAS:
+Expected = 1000000
+Actual   = 1000000
+Time     = 26.60449 ms
+
+What I observed:
+
+Both approaches produced the expected final count, so the shared
+counter was updated correctly in both cases.
+
+The execution time was different for the two approaches on my system.
+The result can change depending on the system and the number of
+threads running at the same time.
+
+This experiment helped me understand how CAS can update a shared
+value atomically without using a traditional synchronized block.
+
+I am not treating CAS as always faster than locking because this
+was a small test on one system.
