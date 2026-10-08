@@ -1,0 +1,1 @@
+#EPAM_Tasks_LNCT_PHOTON
