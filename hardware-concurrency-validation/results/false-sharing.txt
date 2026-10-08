@@ -1,0 +1,43 @@
+False Sharing Experiment
+
+I made a small program to understand false sharing.
+
+Two threads are used in this test. Each thread updates its own
+counter, so logically they are working on different variables.
+
+First, I tested the counters without any padding.
+
+Then I added some unused variables between the two counters and
+ran the same test again.
+
+The idea was to see whether separating the counters changes the
+execution time.
+
+Run:
+
+javac FalseSharingTest.java
+java FalseSharingTest
+
+Output:
+
+False Sharing Test
+
+Without Padding:
+1398.976256 ms
+
+With Padding:
+269.465894 ms
+
+What I observed:
+
+The execution time was different between the two versions on my
+system.
+
+The padded version is intended to reduce the chance that the two
+frequently updated variables share the same cache line.
+
+This helped me understand that even when two threads are updating
+different variables, cache-line sharing can still affect performance.
+
+The result is specific to my system and this particular test, so I
+am not treating it as a universal performance measurement.
