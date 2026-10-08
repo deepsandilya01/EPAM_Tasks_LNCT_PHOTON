@@ -1,0 +1,48 @@
+Ring Buffer Experiment
+
+I made a small producer-consumer program using a fixed-size ring
+buffer.
+
+The buffer has 8 positions. The producer puts values into the
+buffer and the consumer reads them.
+
+When the write position reaches the end of the buffer, it starts
+again from the beginning. The same happens with the read position.
+
+I used two threads:
+- Producer thread
+- Consumer thread
+
+The producer generated 100000 messages and the consumer read all
+of them.
+
+Run:
+
+javac RingBufferDemo.java
+java RingBufferDemo
+
+Output:
+
+Consumer finished
+Sum = 4999950000
+
+Ring Buffer Test
+Messages = 100000
+Time = 359.166668 ms
+Throughput = 278422.27274831635 messages/sec
+
+What I observed:
+
+The producer and consumer were able to communicate using the
+fixed-size buffer. The buffer reused the same positions instead
+of continuously creating new storage.
+
+The consumer received all 100000 values and the calculated sum
+was correct.
+
+This experiment helped me understand how a ring buffer can be used
+for producer-consumer communication and how the buffer wraps around
+when it reaches the end.
+
+This is a simple demonstration of the ring buffer concept and is
+not an implementation of the LMAX Disruptor.
