@@ -1,0 +1,44 @@
+Memory Visibility Experiment
+
+I made a small program with two threads to understand how data
+written by one thread is seen by another thread.
+
+There are two threads:
+
+Writer:
+- writes data = 42
+- then changes ready to true
+
+Reader:
+- waits until ready becomes true
+- then reads data
+
+For this test, I used volatile with the ready variable.
+
+Code used:
+MemoryVisibilityTest.java
+
+Run:
+javac MemoryVisibilityTest.java
+java MemoryVisibilityTest
+
+Output:
+Writer: data is ready
+Reader: data = 42
+Done
+
+What I observed:
+
+The writer updated the data first and then set ready to true.
+After ready became true, the reader was able to read the value 42.
+
+The main thing I understood from this test is that volatile helps
+make the change of ready visible to the other thread and maintains
+the required ordering for this simple communication.
+
+This was a basic test to understand the memory visibility problem
+between two threads.
+
+Note:
+The normal non-volatile version may also print 42 during testing.
+That does not mean that visibility is guaranteed in that version.
